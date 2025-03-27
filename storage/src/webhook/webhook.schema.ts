@@ -6,7 +6,7 @@ export type WebhookDocument = Webhook & Document;
 @Schema()
 export class Webhook {
   @Prop({ required: true })
-  eventType: string;
+  type: string;
 
   @Prop({ required: true, type:Object })
   payload: object;

@@ -11,8 +11,8 @@ export class WebhookService {
     async logWebhookEvent(data: any):Promise<void> {
         console.log('Received Webhook Event:', data);
         const webHook = new this.webhookModel({
-            eventType: data.eventType,
-            payload: data.payload
+            type: data.data.type,
+            payload: data.data.payload
         })
         await webHook.save();
         console.log("Webhook event saved successfully in MongoDB");

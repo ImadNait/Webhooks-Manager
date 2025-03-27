@@ -6,10 +6,10 @@ export class WebhookController {
     constructor(private readonly webhookService: WebhookService) {}
 
     @Post('logs')
-    async handeWebHook(@Body() payload: any){
-        await this.webhookService.logWebhookEvent(payload.data);
+    async handeWebHook(@Body() data: any){
+        await this.webhookService.logWebhookEvent(data);
 
-        return { message: 'Webhook received', success: true, content:payload };
+        return { message: 'Webhook received', success: true, content:data };
     }
 
 }
