@@ -8,14 +8,17 @@ export class WebhookService {
     constructor(
       @InjectModel(Webhook.name) private webhookModel: Model<WebhookDocument>, 
     ) {}
-    async logWebhookEvent(data: any):Promise<void> {
+
+    async logWebhookEvent(data: any): Promise<void> {
         console.log('Received Webhook Event:', data);
+
         const webHook = new this.webhookModel({
-            type: data.data.type,
-            payload: data.data.payload
-        })
+            eventId: data.id,  
+            type: data.type,   
+            fullPayload: data  
+        });
+
         await webHook.save();
         console.log("Webhook event saved successfully in MongoDB");
-      }
-    
+    }
 }

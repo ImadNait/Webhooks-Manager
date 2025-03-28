@@ -1,18 +1,22 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, Schema as MongooseSchema } from 'mongoose';
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { Document } from "mongoose";
 
 export type WebhookDocument = Webhook & Document;
 
 @Schema()
 export class Webhook {
   @Prop({ required: true })
-  eventType: string;
+  eventId: string;
 
-  @Prop({ required: true, type:MongooseSchema.Types.Mixed })
-  payload: object;
+  @Prop({ required: true })
+  type: string;
 
-  @Prop({ default: Date.now, index:true })
+  @Prop({ required: true, type: Object })
+  fullPayload: object;
+
+  @Prop({ default: Date.now })
   receivedAt: Date;
 }
 
 export const WebhookSchema = SchemaFactory.createForClass(Webhook);
+
