@@ -13,9 +13,9 @@ export class WebhookService {
         console.log('Received Webhook Event:', data);
 
         const webHook = new this.webhookModel({
-            eventId: data.id,  
-            type: data.type,   
-            fullPayload: data  
+            eventId: data.data.id,  
+            type: data.data.type,   
+            fullPayload: data 
         });
 
         await webHook.save();
