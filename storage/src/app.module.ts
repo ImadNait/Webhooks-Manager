@@ -6,13 +6,12 @@ import { WebhookModule } from './webhook/webhook.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb+srv://imad:imad552006@webhooks.8ha9j.mongodb.net/webhook'),
+    MongooseModule.forRoot(
+      'mongodb+srv://imad:imad552006@webhooks.8ha9j.mongodb.net/webhook',
+    ),
     WebhookModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-
-
-export class AppModule{}
-
+export class AppModule {}

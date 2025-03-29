@@ -5,11 +5,11 @@ import { WebhookController } from './webhook.controller';
 import { WebhookService } from './webhook.service';
 
 @Module({
-    imports: [
-        MongooseModule.forFeature([{ name: Webhook.name, schema: WebhookSchema }]),
-      ],
-    controllers: [WebhookController],
-    providers: [WebhookService],
-    exports: [WebhookService],
+  imports: [
+    MongooseModule.forFeature([{ name: Webhook.name, schema: WebhookSchema }]),
+  ],
+  controllers: [WebhookController],
+  providers: [WebhookService],
+  exports: [WebhookService],
 })
 export class WebhookModule {}

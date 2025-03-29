@@ -5,20 +5,20 @@ import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()
 export class WebhookService {
-    constructor(
-      @InjectModel(Webhook.name) private webhookModel: Model<WebhookDocument>, 
-    ) {}
+  constructor(
+    @InjectModel(Webhook.name) private webhookModel: Model<WebhookDocument>,
+  ) {}
 
-    async logWebhookEvent(data: any): Promise<void> {
-        console.log('Received Webhook Event:', data);
+  async logWebhookEvent(data: any): Promise<void> {
+    console.log('Received Webhook Event:', data);
 
-        const webHook = new this.webhookModel({
-            eventId: data.data.id,  
-            type: data.data.type,   
-            fullPayload: data 
-        });
+    const webHook = new this.webhookModel({
+      eventId: data.data.id,
+      type: data.data.type,
+      fullPayload: data,
+    });
 
-        await webHook.save();
-        console.log("Webhook event saved successfully in MongoDB");
-    }
+    await webHook.save();
+    console.log('Webhook event saved successfully in MongoDB');
+  }
 }

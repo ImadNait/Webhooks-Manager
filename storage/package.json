@@ -20,15 +20,19 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@nestjs/bull": "^11.0.2",
     "@nestjs/common": "^11.0.1",
     "@nestjs/core": "^11.0.1",
     "@nestjs/mongoose": "^11.0.2",
     "@nestjs/platform-express": "^11.0.1",
+    "bull": "^4.16.5",
+    "bullmq": "^5.45.0",
     "cors": "^2.8.5",
     "mongoose": "^8.12.2",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
-    "stripe": "^17.7.0"
+    "stripe": "^17.7.0",
+    "twilio": "^5.5.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
