@@ -8,7 +8,7 @@ With the integration of MongoDB for storage, Express.js for webhook handling, an
 
 * **Webhook Event Logging:** Capture and store incoming webhook events.
 
-* **Forwarding Webhook Events:** Send webhook events to external services (e.g., Discord).
+* **Forwarding Webhook Events:** Send webhook events to external services (in this project i used Discord).
 
 * **Notification System:**
 
