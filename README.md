@@ -1,7 +1,7 @@
-# Webhook Event Logger
+# Webhook Manager
 
 ## Overview
-Webhook Event Logger is a NestJS-based service designed to log, process, and forward webhook events with high efficiency. This system is built to ensure reliable event handling, notification dispatching, and seamless event forwarding. It supports Stripe webhooks and provides a structured way to manage incoming requests.
+Webhook Manager is a NestJS-based service designed to log, process, and forward webhook events with high efficiency. This system is built to ensure reliable event handling, notification dispatching, and seamless event forwarding. It supports Stripe webhooks and provides a structured way to manage incoming requests.
 With the integration of MongoDB for storage, Express.js for webhook handling, and Twilio/Nodemailer for notifications, this project provides a robust solution for webhook event management. A future enhancement includes retrying failed webhook deliveries using Redis job queues.
 
 ## Features
