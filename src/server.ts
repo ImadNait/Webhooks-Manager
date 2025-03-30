@@ -44,7 +44,7 @@ app.post("/webhook", async (req: Request, res: Response) => {
   console.log("Webhook received:", req.body);
 
   try {
-    await axios.post(`${process.env.Nest_API}`, { data: req.body });
+    await axios.post(`${process.env.Nest_API}`, req.body);
     console.log("Webhook's been sent to Nest server"); 
   } catch (error) {
     console.error("Error forwarding webhook:", error);

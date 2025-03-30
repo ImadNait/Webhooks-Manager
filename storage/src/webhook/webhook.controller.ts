@@ -1,6 +1,5 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { WebhookService } from './webhook.service';
-import { Webhook } from './webhook.schema';
 import { sendToDiscord } from '../../../src/server';
 import { SmsService } from './sms.service';
 import { sendEmail } from './nodemailer.service';
@@ -11,40 +10,45 @@ export class WebhookController {
   @Post('logs')
   async handeWebHook(@Body() data: any) {
     const event = data;
-    switch (event.data.type) {
+    console.log("this is the webhoook: ", event);  
+    switch (event.type) {
       case 'payment_intent.succeeded':
-        const paymentIntent = event.eventId;
+        const paymentIntent = event.data.object.id;
         console.log(`PaymentIntent ${paymentIntent} was successful.`);
         break;
       case 'payment_method.attached':
-        const paymentMethod = event.eventId;
+        const paymentMethod = event.data.object.id;
         console.log(
           `PaymentMethod ${paymentMethod} was attached to a customer.`,
         );
         break;
       case 'payment_intent.created':
-        const newPaymentIntent = event.eventId;
+        const newPaymentIntent = event.data.object.id;
         console.log(`PaymentIntent ${newPaymentIntent} was created.`);
         break;
       case 'payment_intent.canceled':
-        const canPaymentIntent = event.eventId;
+        const canPaymentIntent = event.data.object.id;
         console.log(`PaymentIntent ${canPaymentIntent} was canceled.`);
         break;
       case 'payment_intent.processing':
-        const processPaymentIntent = event.eventId;
+        const processPaymentIntent = event.data.object.id;
         console.log(
           `PaymentIntent ${processPaymentIntent} is being processed.`,
         );
         break;
       default:
-        console.log(`Unhandled event type ${event.data.type}`);
+        console.log(`Unhandled event type ${event.type}`);
         return;
     }
     const smsService = new SmsService();
-    await smsService.sendSms('+213542470211', 'Webhook event received!');
-    sendEmail('naitmihoubimzd@gmail.com',"nigga","hehe")
+    await smsService.sendSms('+18456225734', 'Webhook event received!');
+
+    sendEmail('philnait2013@gmail.com',"Webhook received",`Webhook of type ${event.type} has been delivered to you successfully.`)
+    
     await this.webhookService.logWebhookEvent(data);
+    
     await sendToDiscord(event);
+    
     return { message: 'Webhook received', success: true, content: data };
   }
 }

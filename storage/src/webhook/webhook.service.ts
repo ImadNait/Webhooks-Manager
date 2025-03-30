@@ -13,8 +13,8 @@ export class WebhookService {
     console.log('Received Webhook Event:', data);
 
     const webHook = new this.webhookModel({
-      eventId: data.data.id,
-      type: data.data.type,
+      eventId: data.id,
+      type: data.type,
       fullPayload: data,
     });
 
