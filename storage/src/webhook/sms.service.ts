@@ -7,8 +7,8 @@ export class SmsService {
   private twilioClient: Twilio.Twilio;
 
   constructor() {
-    const accountSid = `AC455b0117f211b6362a55911e6653d62e`;
-    const authToken = `c1f6b2eca695c0276da56a4a233fcb20`;
+    const accountSid = `${process.env.TWILIO_ACCOUNT_SID}`;
+    const authToken = `${process.env.TWILIO_AUTH_TOKEN}`;
     if (!accountSid || !authToken) {
       throw new Error("Twilio credentials are missing!");
     }
@@ -21,7 +21,7 @@ export class SmsService {
     try {
       const result = await this.twilioClient.messages.create({
         body: message,
-        from: `+18456225734`,
+        from: `${process.env.TWILIO_PHONE_NUMBER}`,
         to: to,
       });
       console.log('SMS sent to', result.sid);

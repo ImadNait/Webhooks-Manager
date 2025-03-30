@@ -3,11 +3,13 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { WebhookModule } from './webhook/webhook.module';
+import * as dotenv from 'dotenv';
+dotenv.config(); 
 
 @Module({
   imports: [
     MongooseModule.forRoot(
-      'mongodb+srv://imad:imad552006@webhooks.8ha9j.mongodb.net/webhook',
+      `${process.env.DB_URI}`,
     ),
     WebhookModule,
   ],

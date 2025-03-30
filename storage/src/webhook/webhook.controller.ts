@@ -3,6 +3,8 @@ import { WebhookService } from './webhook.service';
 import { sendToDiscord } from '../../../src/server';
 import { SmsService } from './sms.service';
 import { sendEmail } from './nodemailer.service';
+import * as dotenv from 'dotenv';
+dotenv.config(); 
 @Controller('webhook')
 export class WebhookController {
   constructor(private readonly webhookService: WebhookService) {}
@@ -41,9 +43,9 @@ export class WebhookController {
         return;
     }
     const smsService = new SmsService();
-    await smsService.sendSms('+18456225734', 'Webhook event received!');
+    await smsService.sendSms(`${process.env.TWILIO_PHONE_NUMBER}`, 'Webhook event received!');
 
-    sendEmail('philnait2013@gmail.com',"Webhook received",`Webhook of type ${event.type} has been delivered to you successfully.`)
+    sendEmail(`${process.env.RECEIVER_EMAIL}`,"Webhook received",`Webhook of type ${event.type} has been delivered to you successfully.`)
     
     await this.webhookService.logWebhookEvent(data);
     
