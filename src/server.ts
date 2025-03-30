@@ -1,7 +1,8 @@
-import express, { Request, Response } from "express";
-import cors from "cors";
+import { Request, Response } from "express";
+const cors = require('cors')
+const express = require('express');
 require('dotenv').config()
-import bodyParser from "body-parser";
+const bodyParser = require("body-parser");
 import axios from "axios";
 
 const app = express();

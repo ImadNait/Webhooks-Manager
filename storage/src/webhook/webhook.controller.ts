@@ -3,14 +3,15 @@ import { WebhookService } from './webhook.service';
 import { Webhook } from './webhook.schema';
 import { sendToDiscord } from '../../../src/server';
 import { SmsService } from './sms.service';
+import { sendEmail } from './nodemailer.service';
 @Controller('webhook')
 export class WebhookController {
   constructor(private readonly webhookService: WebhookService) {}
 
   @Post('logs')
-  async handeWebHook(@Body() data: Webhook) {
+  async handeWebHook(@Body() data: any) {
     const event = data;
-    switch (event.type) {
+    switch (event.data.type) {
       case 'payment_intent.succeeded':
         const paymentIntent = event.eventId;
         console.log(`PaymentIntent ${paymentIntent} was successful.`);
@@ -36,11 +37,12 @@ export class WebhookController {
         );
         break;
       default:
-        console.log(`Unhandled event type ${event}`);
+        console.log(`Unhandled event type ${event.data.type}`);
         return;
     }
     const smsService = new SmsService();
     await smsService.sendSms('+213542470211', 'Webhook event received!');
+    sendEmail('naitmihoubimzd@gmail.com',"nigga","hehe")
     await this.webhookService.logWebhookEvent(data);
     await sendToDiscord(event);
     return { message: 'Webhook received', success: true, content: data };
