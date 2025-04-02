@@ -5,6 +5,8 @@ require('dotenv').config()
 const bodyParser = require("body-parser");
 import axios from "axios";
 
+//Here the express server receives the webhooks' events, send them to Nest server and forward them to an existing discord webhooks.
+
 const app = express();
 const PORT = process.env.PORT;
 const DISCORD_WEBHOOK = process.env.DISCORD_WEBH_URL
