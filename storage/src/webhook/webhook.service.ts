@@ -3,6 +3,7 @@ import { Webhook, WebhookDocument } from './webhook.schema';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 
+//The injectable service which adds the new Webhook event to the database.
 @Injectable()
 export class WebhookService {
   constructor(
