@@ -5,6 +5,7 @@ import { SmsService } from './sms.service';
 import { sendEmail } from './nodemailer.service';
 import * as dotenv from 'dotenv';
 dotenv.config(); 
+//Here we find the Nest controller logic, it basically uses the injected functions from other services.
 @Controller('webhook')
 export class WebhookController {
   constructor(private readonly webhookService: WebhookService) {}
@@ -13,6 +14,7 @@ export class WebhookController {
   async handeWebHook(@Body() data: any) {
     const event = data;
     console.log("this is the webhoook: ", event);  
+    //The current accepted stripe webhooks that i choosed, other than these the server won't handle it.
     switch (event.type) {
       case 'payment_intent.succeeded':
         const paymentIntent = event.data.object.id;
@@ -46,7 +48,7 @@ export class WebhookController {
     await smsService.sendSms(`${process.env.TWILIO_PHONE_NUMBER}`, 'Webhook event received!');
 
     sendEmail(`${process.env.RECEIVER_EMAIL}`,"Webhook received",`Webhook of type ${event.type} has been delivered to you successfully.`)
-    
+    //Logging the events in MongoDB
     await this.webhookService.logWebhookEvent(data);
     
     await sendToDiscord(event);
