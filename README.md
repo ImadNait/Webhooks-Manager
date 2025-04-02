@@ -25,3 +25,6 @@ With the integration of MongoDB for storage, Express.js for webhook handling, an
 ### Upcoming Feature
 
 * **Retry Failed Webhook Deliveries:** Automatically retry failed webhook deliveries using Redis Job Queues to reattempt failed events.
+
+
+**Important :** make sure to have Stripe installed before testing the project.
